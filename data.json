@@ -16,8 +16,8 @@
     "tasks": [
         {
             "id": 1,
-            "title": "Preparar presentación de seguridad",
-            "completed": false,
+            "title": "Preparar presentaci\u00f3n de seguridad",
+            "completed": true,
             "category_id": 1
         },
         {
@@ -28,13 +28,13 @@
         },
         {
             "id": 3,
-            "title": "Hacer ejercicio en la mañana",
+            "title": "Hacer ejercicio en la ma\u00f1ana",
             "completed": false,
             "category_id": 3
         },
         {
             "id": 4,
-            "title": "Revisar documentación de Flask",
+            "title": "Revisar documentaci\u00f3n de Flask",
             "completed": true,
             "category_id": 2
         },

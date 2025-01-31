@@ -143,7 +143,6 @@ Estas validaciones deben aplicarse a los siguientes endpoints:
 
 ```json
 {
-    "id": 3,
     "name": "Personal"
 }
 ```
@@ -157,23 +156,21 @@ Estas validaciones deben aplicarse a los siguientes endpoints:
 
 ```json
 {
-    "id": 1,
     "title": "Preparar presentación de seguridad",
     "completed": true,
     "category_id": 1
 }
 ```
 
-### **9. Actualizar completamente una categoría**
+### **9. Actualizar una categoría**
 
-**PUT /categories/{category_id}**
+**PATCH /categories/{category_id}**
 
 - Permite actualizar completamente una categoría existente.
 - **Ejemplo de solicitud:**
 
 ```json
 {
-    "id": 3,
     "name": "Personal"
 }
 ```

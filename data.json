@@ -1,0 +1,48 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "name": "Trabajo"
+        },
+        {
+            "id": 2,
+            "name": "Estudio"
+        },
+        {
+            "id": 3,
+            "name": "Personal"
+        }
+    ],
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Preparar presentaci\u00f3n de seguridad",
+            "completed": true,
+            "category_id": 1
+        },
+        {
+            "id": 2,
+            "title": "Leer sobre OWASP Top 10",
+            "completed": true,
+            "category_id": 2
+        },
+        {
+            "id": 3,
+            "title": "Hacer ejercicio en la ma\u00f1ana",
+            "completed": false,
+            "category_id": 3
+        },
+        {
+            "id": 4,
+            "title": "Revisar documentaci\u00f3n de Flask",
+            "completed": true,
+            "category_id": 2
+        },
+        {
+            "id": 5,
+            "title": "Planificar tareas de la semana",
+            "completed": false,
+            "category_id": 1
+        }
+    ]
+}

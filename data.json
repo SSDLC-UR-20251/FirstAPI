@@ -29,7 +29,7 @@
         {
             "id": 3,
             "title": "Hacer ejercicio en la ma\u00f1ana",
-            "completed": false,
+            "completed": true,
             "category_id": 3
         },
         {

@@ -26,16 +26,48 @@ tasks = data["tasks"]
 def get_categories():
     return jsonify(categories)
 
+# Obtener todas las tareas de un categoria
+@app.route('/categories/<int:category_id>/tasks', methods=['GET'])
+def get_categories_task(category_id):
+    tareas = []
+    for i in tasks:
+        if (i['category_id']) == category_id: tareas.append(i['title'])
+    return jsonify(tareas)
 
 # Obtener todas las tareas
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
     return jsonify(tasks)
 
+# Obtener todas las tareas completas
+@app.route('/tasks/completed=true', methods=['GET'])
+def get_tasks_completed():
+    tareas = []
+    for i in tasks:
+        if i["completed"] == True: tareas.append(i['title'])
+    return jsonify(tareas)
+
 # Actualización parcial de una tarea
 @app.route('/tasks/<int:task_id>', methods=['PATCH'])
 def patch_task(task_id):
     task = next((task for task in tasks if task["id"] == task_id), None)
+    if task is None:
+        abort(404, description="Tarea no encontrada")
+    data = request.json
+    for y in data: tarea = y
+    if tarea == "completed":
+        if (type(data['completed'])) != bool:
+            abort(400, description="Debe ser un Booleano")
+    task.update({
+        key: data[key] for key in data if key in task
+    })
+    save_data()
+    return jsonify(task)
+
+#Crear nueva tarea
+@app.route('/tasks', methods=['POST'])
+def post_task():
+    task = next((task for task in tasks if task["id"] == "task_id"), None)
     if task is None:
         abort(404, description="Tarea no encontrada")
     data = request.json

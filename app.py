@@ -45,5 +45,36 @@ def patch_task(task_id):
     save_data()
     return jsonify(task)
 
+#IMPLEMENTACIONES LABORATORIO
+@app.route('/tasks', methods=['POST'])
+def create_task():
+    data = request.json
+    validate_task (data['title'])
+    if not request.json or not 'title' in request.json:
+        abort(400,"aaaaaa")
+    if not validate_task(request.json['title']):
+        abort(400, description="El titulo debe tener entre 3 y 100 caracteres")
+    task = {
+        'id': len(tasks) + 1,
+        'title': request.json['title'],
+        #'descripcion': request.json.get('descripcion', ""),
+        #'categoria': request.json.get('categoria', "")
+    }
+    tasks.append(task)
+    save_data()
+    return jsonify(task), 201
+
+def validate_task(titulo):
+    if ( len(titulo) > 3 and len(titulo)< 100):
+        return True
+
+@app.route('/tasks/completed', methods=['GET'])
+def get_tasks_completed():
+    return jsonify([task for task in tasks if task.get('completed', True)])
+
+@app.route('/categories/f"{id}"', methods=['GET'])
+def filterCategories():
+    return jsonify([task for task in categories if task.get("category_id", True)])
+
 if __name__ == '__main__':
     app.run(debug=True)

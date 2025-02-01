@@ -50,9 +50,9 @@ def validar_titulo_tarea(title):
         abort(400, description="El título de la tarea debe tener entre 3 y 100 caracteres")
 
 
-def validar_titulo_duplicado(id,title,task_id):
+def validar_titulo_duplicado(id,title):
     for task in tasks:
-        if task["category_id"] == id and task["title"] == title and task["id"] != task_id:
+        if task["category_id"] == id and task["title"] == title :
             abort(400, description="El título de la tarea ya existe en esta categoría")
 
 def bool_estado_tarea(status):
@@ -74,14 +74,15 @@ def create_task():
     data = request.json
     validar_titulo_tarea(data["title"])
     bool_estado_tarea(data["completed"])
-    task_category(data["category_id"])
-    validar_titulo_duplicado(data["category_id"],data["title"],data["id"])
+    #task_category(data["category_id"])
+    
     new_task={
         "id" : len(tasks) + 1,
         "title" : data["title"],
         "completed" : data.get("completed",False),
         "category_id" :  data["category_id"]
     }
+    validar_titulo_duplicado(data["category_id"],data["title"])
     tasks.append(new_task)
     save_data()
     return jsonify(new_task), 201

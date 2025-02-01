@@ -2,7 +2,7 @@
     "categories": [
         {
             "id": 1,
-            "name": "Trabajo"
+            "name": "Personal"
         },
         {
             "id": 2,
@@ -10,13 +10,13 @@
         },
         {
             "id": 3,
-            "name": "Personal"
+            "name": "Trabajo"
         }
     ],
     "tasks": [
         {
             "id": 1,
-            "title": "Preparar presentaci\u00f3n de seguridad",
+            "title": "Preparar presentaci\u00f3n de seguridad 2",
             "completed": true,
             "category_id": 1
         },

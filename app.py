@@ -45,5 +45,57 @@ def patch_task(task_id):
     save_data()
     return jsonify(task)
 
+def validar_titulo_tarea(title):
+    if len(title) < 3 or len(title) > 100:
+        abort(400, description="El título de la tarea debe tener entre 3 y 100 caracteres")
+
+
+def validar_titulo_duplicado(id,title,task_id):
+    for task in tasks:
+        if task["category_id"] == id and task["title"] == title and task["id"] != task_id:
+            abort(400, description="El título de la tarea ya existe en esta categoría")
+
+def bool_estado_tarea(status):
+    if not isinstance(status, bool):
+        abort(400, description="El campo 'completed' debe ser un valor booleano")
+
+def task_category(category_id):
+    for category in categories:
+        if not any(category["id"] == category_id):
+            abort(400,description="El category_id no existe")
+
+def category_name(name):
+    for category in categories:
+        if not name or any(category["name"] == name): 
+            abort(400, description="El nombre de la categoría no debe estar vacío o repetirse")
+
+@app.route('/tasks', methods=['POST'])
+def create_task():
+    data = request.json
+    validar_titulo_tarea(data["title"])
+    bool_estado_tarea(data["completed"])
+    task_category(data["category_id"])
+    validar_titulo_duplicado(data["category_id"],data["title"],data["id"])
+    new_task={
+        "id" : len(tasks) + 1,
+        "title" : data["title"],
+        "completed" : data.get("completed",False),
+        "category_id" :  data["category_id"]
+    }
+    tasks.append(new_task)
+    save_data()
+    return jsonify(new_task), 201
+
+@app.route('/categories', methods=['POST'])
+def create_category():
+    data = request.json
+    category_name(data['name'])
+    new_category = {"id": len(categories)+1,
+                    "name": data['name']
+                     }
+    categories.append(new_category)
+    save_data()
+    return jsonify(new_category), 201
+
 if __name__ == '__main__':
     app.run(debug=True)
